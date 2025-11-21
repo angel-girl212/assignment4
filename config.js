@@ -1919,7 +1919,7 @@ const geojson = {
   ]
 }
 
-map.on('load', function() {
+map.on('load', () => {
   // add markers to map
   for (const feature of geojson.features) {
     // create a HTML element for each feature
@@ -1927,7 +1927,7 @@ map.on('load', function() {
     el.className = 'marker';
     el.style.backgroundImage = "url('images/star.png')";
   
-  // make a marker for each feature and add it to the map
+    // make a marker for each feature and add it to the map
     new mapboxgl.Marker(el)
       .setLngLat(feature.geometry.coordinates)
       .addTo(map);
