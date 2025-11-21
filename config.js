@@ -1932,4 +1932,4 @@ map.on('load', () => {
       .setLngLat(feature.geometry.coordinates)
       .addTo(map);
   }
-}
+});
