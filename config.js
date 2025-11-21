@@ -1,3 +1,18 @@
+// Mapbox access token for API authentication
+mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nbGUta3ByIiwiYSI6ImNtZjJybG10YzFkbnUycG80N3J5cDVid2QifQ.SoIeeUn_3CNLmzU2cgtv1w';
+
+// Initialize Mapbox map
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    style: 'mapbox://styles/angle-kpr/cmi9g9wm5002j01s3fznk0atp',
+    center: [-18.9, 64.88805],
+    zoom: 5.8,
+    minZoom: 5.8,
+    maxZoom: 20,
+    maxBounds:[[-25, 62], [-10, 67]]
+});
+
 const geojson = { 
   "type": "FeatureCollection",
   "features": [
@@ -1904,30 +1919,17 @@ const geojson = {
   ]
 }
 
-// Mapbox access token for API authentication
-mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nbGUta3ByIiwiYSI6ImNtZjJybG10YzFkbnUycG80N3J5cDVid2QifQ.SoIeeUn_3CNLmzU2cgtv1w';
-
-// Initialize Mapbox map
-const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/angle-kpr/cmi9g9wm5002j01s3fznk0atp',
-    center: [-18.9, 64.88805],
-    zoom: 5.8,
-    minZoom: 5.8,
-    maxZoom: 20,
-    maxBounds:[[-25, 62], [-10, 67]]
-});
-
-// add markers to map
-for (const feature of geojson.features) {
-  // create a HTML element for each feature
-  const el = document.createElement('div');
-  el.className = 'marker';
-  el.style.backgroundImage = "url('images/star.png')";
-
-// make a marker for each feature and add it to the map
-  new mapboxgl.Marker(el)
-    .setLngLat(feature.geometry.coordinates)
-    .addTo(map);
+map.on('load', function() {
+  // add markers to map
+  for (const feature of geojson.features) {
+    // create a HTML element for each feature
+    const el = document.createElement('div');
+    el.className = 'marker';
+    el.style.backgroundImage = "url('images/star.png')";
+  
+  // make a marker for each feature and add it to the map
+    new mapboxgl.Marker(el)
+      .setLngLat(feature.geometry.coordinates)
+      .addTo(map);
+  }
 }
