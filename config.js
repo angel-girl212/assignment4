@@ -1925,7 +1925,7 @@ map.on('load', () => {
     // create a HTML element for each feature
     const el = document.createElement('div');
     el.className = 'marker';
-    el.style.backgroundImage = "url('images/star.png')";
+    el.style.backgroundImage = "url('images/redstar.png')";
   
     // make a marker for each feature and add it to the map
     new mapboxgl.Marker(el)
