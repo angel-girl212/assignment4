@@ -1,17 +1,17 @@
 // Mapbox access token for API authentication
-mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nbGUta3ByIiwiYSI6ImNtZjJybG10YzFkbnUycG80N3J5cDVid2QifQ.SoIeeUn_3CNLmzU2cgtv1w';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuc21pdGg1IiwiYSI6ImNtZjJybWFobDA1eHQya3E0YnhlYXFxbTkifQ.Lz1Er-IGk_kJgzfIRIMWeA';
 
 // Initialize Mapbox map
 const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/angle-kpr/cmi9g9wm5002j01s3fznk0atp',
-    center: [-18.9, 64.88805],
-    zoom: 5.8,
-    minZoom: 5.8,
-    maxZoom: 20,
-    maxBounds:[[-25, 62], [-10, 67]]
-});
+  container: 'map', // container ID
+  // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+  style: 'mapbox://styles/bensmith5/cmi51sy0d002a01rz7je5gp4v',
+  center: [-18.9, 64.88805],
+  zoom: 5.8,
+  minZoom: 5.8,
+  maxZoom: 20,
+  maxBounds:[[-25, 62], [-10, 67]]
+}); 
 
 const geojson = { 
   "type": "FeatureCollection",
