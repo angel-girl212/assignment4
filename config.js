@@ -1919,6 +1919,17 @@ const geojson = {
   ]
 }
 
+// setup card which will apear in top right of map (style and div in html)
+const card = document.getElementById('properties');
+const showCard = (feature) => {
+    card.innerHTML = 
+        <div class="map-overlay-inner">
+            <code>${feature.properties.city}, ${feature.properties.admin_name}</code><hr>
+            <button>Get weather</button>
+        </div>;
+    card.style.display = 'block';
+};
+
 map.on('load', () => {
   // add markers to map
   for (const feature of geojson.features) {
@@ -1931,5 +1942,15 @@ map.on('load', () => {
     new mapboxgl.Marker(el)
       .setLngLat(feature.geometry.coordinates)
       .addTo(map);
+
+    // add click event to marker
+    el.addEventListener('click', () => {
+        showCard(feature);
+    });    
   }
 });
+
+// Clicking on the map will hide the card
+map.on('click', () => {
+    card.style.display = 'none';
+});    
