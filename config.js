@@ -1984,9 +1984,9 @@ map.on('click', (e) => {
     }
 
     // drop a marker at clicked location
-    const userMarker = document.createElement('div');
-    userMarker.className = 'marker user-marker';
-    userMarker.style.backgroundImage = "url('images/greensquare.png')";
+    const el = document.createElement('div');
+    el.className = 'marker user-marker';
+    el.style.backgroundImage = "url('images/greensquare.png')";
 
     new mapboxgl.Marker(userMarker)
       .setLngLat(clickedCoords)
