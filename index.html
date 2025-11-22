@@ -25,30 +25,22 @@
             left: 15px;           
             padding: 20px;
             width: 900px; 
-            height: 750px; 
+            height: 720px; 
             border-radius: 8px;
             border: 5px solid SteelBlue;
             background-color: #f0f0f0; /* backup container*/
             margin: 0px;
           }
-
-          .map-overlay {
-            display: none;
-            font: 12px/20px sans-serif;
-            padding: 10px;
-            position: absolute;
-            right: 30px;
-            top: 15px;
-            width: 300px;
-            overflow: hidden;
-            white-space: nowrap;
-          }
     
           .map-overlay-inner {
+            position: absolute;
             background: lightgrey;
             padding: 20px;
-            border-radius: 3px;
+            border-radius: 8px;
             border: 5px solid SteelBlue;
+            width: 650px;
+            right: 30px;   /* move closer/farther horizontally */
+            bottom: 15px;  /* align bottom edges */
          }
 
           .marker {
@@ -67,7 +59,7 @@
               
             background-color: lightgrey;
             width: 650px;
-            height: 750px;
+            height: 720px;
             border: 5px solid SteelBlue;
             padding: 20px;
             margin: 0px;   /* margin not needed */
