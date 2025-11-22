@@ -1925,9 +1925,14 @@ const showCard = (feature) => {
   card.innerHTML = 
       `<div class="map-overlay-inner">
         <code>Nearest calculated city: ${feature.properties.city}, ${feature.properties.admin_name}</code><hr>
-        <button>Get Weather</button>
+        <button id="weather-btn">Get Weather</button>
       </div>`;
    card.style.display = 'block'; 
+
+   // JACK - this is probably where you should send to API
+   document.getElementById('weather-btn').addEventListener('click', () => {    
+    console.log('Coordinates for weather API:', feature.geometry.coordinates[0], feature.geometry.coordinates[1]) // (lng, lat) should appear in console
+   });
 };
 
 map.on('load', () => {
