@@ -1923,11 +1923,10 @@ const geojson = {
 const card = document.getElementById('properties');
 const showCard = (feature) => {
   card.innerHTML = 
-    <div class="map-overlay-inner">
-      <code>${feature.properties.city}, ${feature.properties.admin_name}</code><hr>
-      </hr>
-      <button>Get Weather</button>
-    </div>
+      `<div class="map-overlay-inner">
+        <code>${feature.properties.city}, ${feature.properties.admin_name}</code><hr>
+        <button>Get Weather</button>
+      </div>`;
    card.style.display = 'block'; 
 };
 
