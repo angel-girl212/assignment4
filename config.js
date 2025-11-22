@@ -1922,12 +1922,13 @@ const geojson = {
 // setup card which will apear in top right of map (style and div in html)
 const card = document.getElementById('properties');
 const showCard = (feature) => {
-    card.innerHTML = 
-        <div class="map-overlay-inner">
-            <code>${feature.properties.city}, ${feature.properties.admin_name}</code><hr>
-            <button>Get weather</button>
-        </div>;
-    card.style.display = 'block';
+  card.innerHTML = 
+    <div class="map-overlay-inner">
+      <code>${feature.properties.city}, ${feature.properties.admin_name}</code><hr>
+      </hr>
+      <button>Get Weather</button>
+    </div>
+   card.style.display = 'block'; 
 };
 
 map.on('load', () => {
