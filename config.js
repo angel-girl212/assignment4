@@ -1951,7 +1951,45 @@ map.on('load', () => {
   }
 });
 
-// Clicking on the map will hide the card
-map.on('click', () => {
-    card.style.display = 'none';
-});    
+let userMarker = null; // track the users marker
+
+// click anywhere on map to find nearest city
+map.on('click', (e) => {
+  const clickedCoords = [e.lngLat.lng, e.lngLat.lat];
+
+  // find nearest city
+  let nearestFeature = null;
+  let minDistance = Infinity;
+
+  for (const feature of geojson.features) {
+    const cityCoords = feature.geometry.coordinates;
+
+    // calculate distance (simple Euclidean distance)
+    const dx = cityCoords[0] - clickedCoords[0];
+    const dy = cityCoords [1] - clickedCoords[1];
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < minDistance) {
+      minDistance = distance;
+      nearestFeature = feature;
+    }
+  }
+
+  if (nearestFeature) {
+    showCard(nearestFeature);
+
+    // remove previous user marker if it exists
+    if (userMarker) {
+      userMarker.remove();
+    }
+
+    // drop a marker at clicked location
+    const userMarker = document.createElement('div');
+    userMarker.className = 'marker user-marker';
+    userMarker.style.backgroundImage = "url('images/greensquare.png')";
+
+    new mapboxgl.Marker(userMarker)
+      .setLngLat(clickedCoords)
+      .addTo(map);
+  }
+});
