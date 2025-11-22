@@ -1983,7 +1983,7 @@ map.on('click', (e) => {
       userMarker.remove();
     }
 
-    new mapboxgl.Marker(userMarker)
+    userMarker = new mapboxgl.Marker(userMarker)
       .setLngLat(clickedCoords)
       .addTo(map);
   }
