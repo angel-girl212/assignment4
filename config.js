@@ -1983,11 +1983,6 @@ map.on('click', (e) => {
       userMarker.remove();
     }
 
-    // drop a marker at clicked location
-    const el = document.createElement('div');
-    el.className = 'marker user-marker';
-    el.style.backgroundImage = "url('images/greensquare.png')";
-
     new mapboxgl.Marker(userMarker)
       .setLngLat(clickedCoords)
       .addTo(map);
