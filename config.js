@@ -1944,7 +1944,8 @@ map.on('load', () => {
       .addTo(map);
 
     // add click event to marker
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
+        e.stopPropagation();
         showCard(feature);
     });    
   }
