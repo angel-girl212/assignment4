@@ -7,6 +7,7 @@
       <title>Cryo Climate</title>
 
       <div id="map"></div>
+      <div class="map-overlay right" id="properties"></div>
       
       <!-- CSS STYLES: Defines the visual appearance of all page elements -->
       <style>
@@ -30,6 +31,24 @@
             background-color: #f0f0f0; /* backup container*/
             margin: 0px;
           }
+
+          .map-overlay {
+            display: none;
+            font: 12px/20px sans-serif;
+            padding: 10px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 230px;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+    
+         .map-overlay-inner {
+            background: #fff;
+            padding: 10px;
+            border-radius: 3px;
+         }
 
           .marker {
             background-image: url(''); /* empty to allow conditional iconography */
