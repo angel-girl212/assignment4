@@ -1924,7 +1924,7 @@ const card = document.getElementById('properties');
 const showCard = (feature) => {
   card.innerHTML = 
       `<div class="map-overlay-inner">
-        <code>Nearest calculated city: ${feature.properties.city}, ${feature.properties.admin_name}</code><hr>
+        <p>Nearest calculated city:</p><br><code>${feature.properties.city}, ${feature.properties.admin_name}</code>
         <button id="weather-btn">Get Weather</button>
       </div>`;
    card.style.display = 'block'; 
