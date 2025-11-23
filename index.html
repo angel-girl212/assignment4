@@ -1,110 +1,199 @@
 <!DOCTYPE html>
 <html>
-    <!--HEAD - section of your website adds libraries, style and site settings-->
-    <head>
-
-
-      <title>Cryo Climate</title>
-
-      <div id="map"></div>
-      <div class="map-overlay left" id="properties"></div>
+<head>
+  <title>Cryo Climate</title>
+  
+  <!-- Mapbox GL JS library -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap">
+  
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: LightSteelBlue;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Header */
+    .header {
+      position: relative;
+      text-align: center;
+      padding: 15px;
+      z-index: 100;
+    }
+    
+    h1 {
+      font-size: clamp(24px, 4vw, 45px);
+      font-family: 'Geostar Fill', cursive;
+      margin: 0;
+    }
+    
+    .wand-image {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      height: clamp(50px, 8vh, 100px);
+      width: auto;
+    }
+    
+    /* Main content container */
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      gap: 15px;
+      padding: 15px;
+      min-height: 0;
+      overflow: hidden;
+    }
+    
+    /* Map container - takes up left portion */
+    #map {
+      flex: 1;
+      min-width: 300px;
+      border-radius: 8px;
+      border: 5px solid SteelBlue;
+      background-color: #f0f0f0;
+      position: relative;
+    }
+    
+    /* Map overlay */
+    .map-overlay-inner {
+      position: absolute;
+      background: lightgrey;
+      padding: 15px;
+      border-radius: 8px;
+      border: 5px solid SteelBlue;
+      top: 20px;
+      left: 20px;
+      max-width: 90%;
+      z-index: 5;
+    }
+    
+    .marker {
+      background-image: url('');
+      background-size: cover;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    /* Info box - takes up right portion */
+    #info_box {
+      flex: 1;
+      min-width: 300px;
+      background-color: lightgrey;
+      border: 5px solid SteelBlue;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-y: auto;
+    }
+    
+    #info_box h3 {
+      text-align: center;
+      font-size: clamp(20px, 3vw, 30px);
+      font-family: 'Geostar Fill', cursive;
+      margin-bottom: 15px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
       
-      <!-- CSS STYLES: Defines the visual appearance of all page elements -->
-      <style>
-        /* Prevent scrolling and ensure full viewport coverage */
-          html, body { 
-              overflow: hidden;
-              width: 100%;
-              height: 100%;
-          }
-
-    /* MAP CONTAINER: Takes up left side of page width */
-          #map {
-            position: absolute;   
-            bottom: 15px;         
-            left: 15px;           
-            padding: 20px;
-            width: 900px; 
-            height: 720px; 
-            border-radius: 8px;
-            border: 5px solid SteelBlue;
-            background-color: #f0f0f0; /* backup container*/
-            margin: 0px;
-            z-index: 10;
-          }
+      #map {
+        height: 50%;
+        min-height: 300px;
+      }
+      
+      #info_box {
+        height: 50%;
+        min-height: 250px;
+      }
+      
+      .wand-image {
+        height: clamp(40px, 6vh, 70px);
+        left: 10px;
+      }
+    }
     
-          .map-overlay-inner {
-            position: absolute;
-            background: lightgrey;
-            padding: 20px;
-            border-radius: 8px;
-            border: 5px solid SteelBlue;
-            height: 65px;
-            width: 315px;
-            right: 565px;   /* move closer/farther horizontally */
-            bottom: 670px;  /* 67 */
-            z-index: 5;
-         }   
-
-          .marker {
-            background-image: url(''); /* empty to allow conditional iconography */
-            background-size: cover;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-          }
-
-          #info_box {
-            position: absolute;
-            right: 30px;   /* move closer/farther horizontally */
-            bottom: 15px;  /* align bottom edges */
-              
-            background-color: lightgrey;
-            width: 850px;
-            height: 600px;
-            border: 5px solid SteelBlue;
-            padding: 20px;
-            margin: 0px;   /* margin not needed */
+    @media (max-width: 768px) {
+      .header {
+        padding: 10px;
+      }
+      
+      .content-wrapper {
+        gap: 10px;
+        padding: 10px;
+      }
+      
+      #map, #info_box {
+        border-width: 3px;
+        padding: 15px;
+      }
+      
+      .map-overlay-inner {
+        border-width: 3px;
+        padding: 10px;
+        top: 10px;
+        left: 10px;
+      }
+    }
     
-            border-radius: 8px;
-            z-index: 5;
-          }
+    @media (max-width: 480px) {
+      .wand-image {
+        display: none;
+      }
+      
+      h1 {
+        font-size: 20px;
+      }
+      
+      #info_box h3 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
 
-      </style>
-
-
-      <!-- Mapbox GL JS library for interactive maps -->
-      <link href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" rel="stylesheet">
-      <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
-
-      <!--Load Google Fonts-->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
-    </head> 
-
-
-    <!--  MAKE BACKGROUN COLOUR CHANGE FOR VARYING WEATHER CONDITIONS-->
-    <body style="background-color:  LightSteelBlue;">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap">
-
-
-    <h1 style="text-align:center; font-size:45px;  font-family:'Geostar Fill', cursive;"> Weather Wizard 
-    </h1>
-
-    <img src="images/Wand.gif" 
-     style="position: absolute; top: 0px; right: 950px; height: 100px;" 
-     alt="Magic Wand">
-
-    <div id = "info_box">
-    <h3 style="text-align:center; font-size:30px;  font-family:'Geostar Fill', cursive;"> Weather Conditions Report </h3>
-    <p></p>
+<body>
+  <div class="header">
+    <img src="images/Wand.gif" class="wand-image" alt="Magic Wand">
+    <h1>Weather Wizard</h1>
+  </div>
+  
+  <div class="content-wrapper">
+    <div id="map"></div>
+    <div class="map-overlay left" id="properties"></div>
+    
+    <div id="info_box">
+      <h3>Weather Conditions Report</h3>
+      <p></p>
     </div>
-
-    </body>
-    
-    <script src="config.js"></script>
-
-    </html>
+  </div>
+  
+  <script src="config.js"></script>
+</body>
+</html>
